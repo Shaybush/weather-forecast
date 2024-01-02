@@ -1,0 +1,28 @@
+.weatherWidgetWrapper {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.cityHeader {
+  font-size: 35px;
+  font-weight: bolder;
+  margin: 0 0 8px 0;
+}
+
+.countrySubHeader {
+  color: #747a86;
+  font-size: 18px;
+  margin: 0 0 50px 0;
+}
+
+.tempDesign {
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+@media (max-width: 768px) {
+  .weatherWidgetWrapper {
+    max-width: 100%;
+    padding: 8px;
+  }
+}
