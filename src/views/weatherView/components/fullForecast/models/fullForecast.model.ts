@@ -7,6 +7,7 @@ export interface IDailyForecastsModel {
   Date: string;
   Day: {
     IconPhrase: string;
+    Icon: number;
   };
   Temperature: {
     Maximum: ITemperatureModel;

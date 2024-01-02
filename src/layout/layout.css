@@ -10,3 +10,13 @@
   max-height: calc(100vh - 28px);
   overflow-y: auto;
 }
+
+@media (max-width: 768px) {
+  .side-bar-container {
+    display: none;
+  }
+
+  .outlet-container {
+    width: 100%;
+  }
+}

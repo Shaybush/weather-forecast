@@ -1,19 +1,44 @@
-.fullForceCastContainer {
+.forecastSlider {
   display: flex;
   justify-content: space-around;
-  background-color: #202c3c !important;
-  margin-top: 150px;
-  padding: 15px;
-  border-radius: 15px;
-  min-height: 200px;
+}
+
+.header {
+  color: #747a86;
+}
+
+.border {
+  height: inherit;
+  background: #747a86;
+  width: 1px;
+  display: block;
 }
 
 .temperatureStyle {
-  font-weight: 700;
-  font-size: 30px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.dateStyle {
-  font-size: 18px;
-  font-weight: 500;
+@media (max-width: 768px) {
+  .forecastSlider {
+    /* scrollbar-width: none; */
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .forecastDesign {
+    width: 200px !important;
+    padding: 0 12px;
+    display: inline-block;
+  }
+
+  .header {
+    font-size: 16px;
+  }
+
+  .temperatureStyle {
+    font-size: 12px;
+  }
 }

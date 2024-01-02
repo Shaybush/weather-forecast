@@ -1,0 +1,19 @@
+.cardContainer {
+  background-color: #202c3c !important;
+  padding: 40px 52px;
+  border-radius: 15px;
+  transition: 0.5s;
+}
+
+.cardHeader {
+  color: #747a86;
+  margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .cardContainer {
+    padding: 16px 24px;
+  }
+}

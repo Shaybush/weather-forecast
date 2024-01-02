@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25px auto 25px auto;
+  margin: 25px auto 40px auto;
   width: 60%;
   height: 60px;
   background-color: #33415b;
@@ -24,6 +24,7 @@
   list-style-type: none;
   cursor: pointer;
   transition: 0.5s;
+  margin-bottom: 12px;
 }
 
 .side-bar-wrapper a {
@@ -38,7 +39,7 @@
   color: white;
 }
 
-.icons-style a.active path{
+.icons-style a.active path {
   fill: white;
 }
 

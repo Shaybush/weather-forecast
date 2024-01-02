@@ -3,92 +3,65 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import FullForecast from "./components/fullForecast";
 import Search from "./components/search";
 import WeatherWidget from "./components/weatherWidget";
-import React, { useEffect, useState } from "react";
-import { ISearchModel } from "./components/search/models/search.model";
+import React, { useEffect } from "react";
 import { onChangeCurrentCity } from "../../redux/features/citySlice";
-
-interface IMetricModel {
-  value: number;
-  Unit: string;
-  UnitType: number;
-}
-
-interface IImperialModel extends IMetricModel {}
-
-export interface ICurrentCityModel {
-  currentCity: ICurrentCityPropsModel;
-}
-
-export interface ICurrentCityPropsModel extends ISearchModel {
-  weatherText?: string;
-  Metric?: IMetricModel;
-  Imperial?: IImperialModel;
-}
+import { IGeoLocationModel } from "./models/weatherView.model";
 
 const WeatherView = () => {
   const dispatch = useAppDispatch();
   const { currentCity } = useAppSelector((state) => state.citySlice);
-  const [mappedCurrentCity, setMappedCurrentCity] =
-    useState<ICurrentCityPropsModel>();
 
   // on init get tel aviv
   useEffect(() => {
-    if (currentCity) {
-      const getCityDetails = async () => {
-        const { data } = await axios.get(
-          `${
-            import.meta.env.VITE_URL
-          }/locations/v1/cities/geoposition/search?apikey=${
-            import.meta.env.VITE_APIKEY
-          }=32.060266,34.760680`
-        );
-        dispatch(
-          onChangeCurrentCity({
-            currentCity: {
-              city: data.ParentCity.LocalizedName,
-              country: data.Country.LocalizedName,
-              key: data.ParentCity.Key,
-            },
-          })
-        );
-      };
-      getCityDetails();
-    }
+    if (Object.keys(currentCity).length === 0) getLanLong();
   }, []);
 
-  useEffect(() => {
-    if (currentCity.key) getConditions();
-  }, [currentCity]);
-
-  const getConditions = async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_URL}/currentconditions/v1/${
-        currentCity.key
-      }?apikey=${import.meta.env.VITE_APIKEY}`
-    );
-
-    setMappedCurrentCity({
-      city: currentCity.city,
-      country: currentCity.country,
-      key: currentCity.key,
-      Imperial: data[0].Temperature.Imperial,
-      Metric: data[0].Temperature.Metric,
-      weatherText: data[0].WeatherText,
-    });
+  const getLanLong = () => {
+    const options = {
+      enableHighAccuracy: true,
+      maximumAge: 0,
+    };
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
+  const success = async (position: IGeoLocationModel) => {
+    const { data } = await axios.get(
+      `${
+        import.meta.env.VITE_URL
+      }/locations/v1/cities/geoposition/search?apikey=${
+        import.meta.env.VITE_APIKEY
+      }&q=${position.coords.latitude},${position.coords.longitude}`
+    );
+
+    // update current city to
+    dispatch(
+      onChangeCurrentCity({
+        currentCity: {
+          city: data.LocalizedName,
+          country: data.Country.LocalizedName,
+          key: data.Key,
+        },
+      })
+    );
+  };
+
+  function error() {
+    console.warn("Couldn't find location");
+  }
+
   return (
-    <>
+    <React.Fragment>
       <Search />
-      {mappedCurrentCity ? (
+      {Object.keys(currentCity).length !== 0 ? (
         <React.Fragment>
-          <WeatherWidget currentCity={mappedCurrentCity} />
-          <FullForecast currentCity={mappedCurrentCity} />
+          <WeatherWidget />
+          <FullForecast />
         </React.Fragment>
       ) : (
-        <div>loader..</div>
+        <div className="p-2">loader..</div>
       )}
-    </>
+    </React.Fragment>
   );
 };
 

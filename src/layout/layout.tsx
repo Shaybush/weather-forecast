@@ -10,7 +10,7 @@ const Layout = () => {
       </div>
 
       {/* outlet */}
-      <div className="container outlet-container">
+      <div className="outlet-container">
         <Outlet />
       </div>
       <></>

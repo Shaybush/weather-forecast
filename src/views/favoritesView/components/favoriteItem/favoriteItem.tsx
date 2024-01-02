@@ -1,18 +1,23 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
 import StarIcon from "../../../../assets/icons/starIcon";
-import { favoritePropsModel } from "../../../../redux/models/favorite.model";
-import style from "./favoriteItem.module.css";
-import axios from "axios";
+import { onChangeCurrentCity } from "../../../../redux/features/citySlice";
 import { onDeleteFavorite } from "../../../../redux/features/favoriteSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import { favoritePropsModel } from "../../../../redux/models/favorite.model";
+import Card from "../../../../shared/components/card";
+import style from "./favoriteItem.module.css";
 
 interface FavoritesItemProps {
   favorite: favoritePropsModel;
 }
 
 const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
-  const dispatch = useDispatch();
+  const { unitMetric } = useAppSelector((state) => state.tempUnitSlice);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [temperatureValue, setTemperatureValue] = useState(0);
   const [temperatureUnit, setTemperatureUnit] = useState("");
 
@@ -23,28 +28,60 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
           favorite.key
         }?apikey=${import.meta.env.VITE_APIKEY}`
       );
-      console.log(data);
-      setTemperatureValue(data[0].Temperature.Metric.Value);
-      setTemperatureUnit(data[0].Temperature.Metric.Unit);
+      setTemperatureValue(
+        unitMetric
+          ? data[0].Temperature.Metric.Value
+          : data[0].Temperature.Imperial.Value
+      );
+      setTemperatureUnit(
+        unitMetric
+          ? data[0].Temperature.Metric.Unit
+          : data[0].Temperature.Imperial.Unit
+      );
     };
     func();
   }, []);
 
-  const removeCityFromFavorites = (key: string) => {
-    dispatch(onDeleteFavorite({ Key: key }));
+  const removeCityFromFavorites = (favorite: favoritePropsModel) => {
+    if (
+      confirm(
+        `Are you sure you want to remove ${favorite.cityName} from favorite ?`
+      )
+    ) {
+      dispatch(onDeleteFavorite({ Key: favorite.key }));
+    }
+  };
+
+  const navToCity = (favorite: favoritePropsModel) => {
+    dispatch(
+      onChangeCurrentCity({
+        currentCity: {
+          city: favorite.cityName,
+          country: favorite.countryName,
+          key: favorite.key,
+        },
+      })
+    );
+    navigate("/");
   };
 
   return (
-    <div className={style.favoriteWrapper}>
+    <Card styleClass={`position-relative ${style.cursorPointer}`}>
       {temperatureValue ? (
         <React.Fragment>
+          {/* star icon */}
           <div
             className={style.starIconStyle}
-            onClick={() => removeCityFromFavorites(favorite.key)}
+            onClick={() => removeCityFromFavorites(favorite)}
           >
             <StarIcon color="#ffdd00" />
           </div>
-          <div className={style.favoriteCard}>
+
+          {/* city details */}
+          <div
+            className={style.favoriteCard}
+            onClick={() => navToCity(favorite)}
+          >
             <h3 className="mt-4">{favorite.cityName}</h3>
             <SunnIcon3D width={100} height={100} />
             <h4 className={style.temperatureStyle}>
@@ -55,7 +92,7 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
       ) : (
         <div className={style.favoriteLoading}>Loading ...</div>
       )}
-    </div>
+    </Card>
   );
 };
 

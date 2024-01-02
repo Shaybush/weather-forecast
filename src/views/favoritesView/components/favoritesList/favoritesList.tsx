@@ -7,10 +7,11 @@ const FavoritesList = () => {
   );
 
   return (
-    <div className="container">
-      <div className="row gap-2">
+    <div className="p-2">
+      <h2 className="mb-4">Favorite List:</h2>
+      <div className="row">
         {favoritesArray.map((favorite) => (
-          <div key={favorite.key} className="col-md-3 mb-4">
+          <div key={favorite.key} className="col-lg-3 col-md-4 col-6 p-2">
             <FavoriteItem favorite={favorite} />
           </div>
         ))}

@@ -1,17 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ISearchModel } from "../../views/weatherView/components/search/models/search.model";
-
-
-interface cityModel {
-  currentCity: ISearchModel;
-}
+import { cityModel } from "../../views/weatherView/components/search/models/search.model";
 
 const initialState: cityModel = {
-  currentCity: {
-    key: "",
-    city:'',
-    country: ''
-  }
+  currentCity: {}
 };
 
 const citySlice = createSlice({

@@ -1,34 +1,32 @@
 import axios from "axios";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import style from "./fullForecast.module.css";
-import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
+import CloudyIcon3D from "../../../../assets/icons/3D/cloudyIcon3D";
+import LightningIcon3D from "../../../../assets/icons/3D/lightningIcon3D";
+import RainIcon3D from "../../../../assets/icons/3D/rainIcon3D";
+import SunnyCloudyIcon3D from "../../../../assets/icons/3D/sunnyCloudyIcon3D";
 import { useAppSelector } from "../../../../redux/hooks";
+import Card from "../../../../shared/components/card";
+import style from "./fullForecast.module.css";
 import {
   IAxiosDailyForecastsModel,
   IDailyForecastsModel,
 } from "./models/fullForecast.model";
 
 const FullForecast = () => {
-  const [foreCast, setForeCast] = useState<IDailyForecastsModel[]>();
   const { currentCity } = useAppSelector((state) => state.citySlice);
+  const { unitMetric } = useAppSelector((state) => state.tempUnitSlice);
+  const [foreCast, setForeCast] = useState<IDailyForecastsModel[]>();
 
-  const formatAMPM = (UNIX_timestamp: number) => {
-    const date = new Date(UNIX_timestamp);
-    console.log(date);
-
-    let hours = date.getHours();
-    let minutes: string | number = date.getMinutes();
-    let seconds: string | number = date.getSeconds();
-
-    const ampm = hours >= 12 ? "pm" : "am";
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    const strTime = hours + ":" + minutes + ":" + seconds + " " + ampm;
-
-    return strTime;
-  };
+  const iconsScales = 80;
+  // just demo
+  const weatherIconsArray = [
+    <SunnyCloudyIcon3D width={iconsScales} height={iconsScales} />,
+    <CloudyIcon3D width={iconsScales} height={iconsScales} />,
+    <SunnyCloudyIcon3D width={iconsScales} height={iconsScales} />,
+    <LightningIcon3D width={iconsScales} height={iconsScales} />,
+    <RainIcon3D width={iconsScales} height={iconsScales} />,
+  ];
 
   const fetch = async () => {
     try {
@@ -37,36 +35,59 @@ const FullForecast = () => {
       } = await axios.get<IAxiosDailyForecastsModel>(
         `${import.meta.env.VITE_URL}/forecasts/v1/daily/5day/${
           currentCity.key
-        }?apikey=${import.meta.env.VITE_APIKEY}`
+        }?apikey=${import.meta.env.VITE_APIKEY}&metric=${unitMetric}`
       );
-      console.log(
-        DailyForecasts.map((el) => {
-          const res: number = Date.parse(el.Date);
-          return formatAMPM(res);
-        })
-      );
-      setForeCast(DailyForecasts);
+      const foreCastTemp: IDailyForecastsModel[] = mapForecasts(DailyForecasts);
+      setForeCast(foreCastTemp);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const mapForecasts = (
+    dailyForecasts: IDailyForecastsModel[]
+  ): IDailyForecastsModel[] => {
+    return dailyForecasts.map((el) => {
+      const date: number = Date.parse(el.Date);
+      return {
+        Date: format(date, "MMM, yyyy"),
+        Day: el.Day,
+        Temperature: el.Temperature,
+      };
+    });
+  };
+
   useEffect(() => {
     fetch();
-  }, [currentCity]);
+  }, [currentCity, unitMetric]);
 
   return (
-    <div className={style.fullForceCastContainer}>
-      {foreCast?.map((item, i) => (
-        <div key={i} className="d-flex flex-column align-items-center">
-          {/* <p className={style.dateStyle}> {item}</p> */}
-          <SunnIcon3D width={80} height={80} />
-          <p className={style.temperatureStyle}>
-            {/* {item.temperatureValue}°{item.temperatureUnit} */}
-          </p>
-        </div>
-      ))}
-    </div>
+    <Card headerContext="5-DAY FORECAST">
+      <div className={style.forecastSlider}>
+        {foreCast?.map((item, i) => (
+          <div key={i} className={`${style.forecastDesign}`}>
+            <div className="d-flex flex-column align-items-center">
+              <h4 className={style.header}>{item.Date}</h4>
+              {weatherIconsArray[Math.floor(item.Day.Icon / 9)]}
+              <p className={style.temperatureStyle}>
+                <span>
+                  {Math.floor(item.Temperature.Minimum.Value)}°
+                  {item.Temperature.Minimum.Unit}
+                </span>
+                <span className="px-1">-</span>
+                <span>
+                  {Math.floor(item.Temperature.Maximum.Value)}°
+                  {item.Temperature.Maximum.Unit}
+                </span>
+              </p>
+            </div>
+
+            {/* border right */}
+            {i !== foreCast.length - 1 && <div className={style.border}></div>}
+          </div>
+        ))}
+      </div>
+    </Card>
   );
 };
 
