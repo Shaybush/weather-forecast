@@ -62,17 +62,17 @@ const AutoCompleteValues = ({
                 className={`${style.listItem} list-group-item d-flex justify-content-between`}
                 onClick={() => navigateToCity(result)}
               >
-                <span className="text-white">
+                <span className={style.listContext}>
                   {result.city}, {result.country}
                 </span>
                 <div onClick={(e) => toggleFavorite(e, result)}>
                   <StarIcon
                     width={20}
                     height={20}
-                    color={
+                    styleClass={
                       favorites.some((favorite) => favorite.key === result.key)
-                        ? "#ffdd00"
-                        : "#828a93"
+                        ? "text-star-icon-active"
+                        : "text-star-icon"
                     }
                   />
                 </div>

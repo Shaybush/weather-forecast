@@ -3,7 +3,6 @@ import { IconProps } from "./model/icon.model";
 const SunnyCloudyIcon = ({
   width = 32,
   height = 32,
-  color = "#828a93",
   styleClass = "",
 }: IconProps) => {
   return (
@@ -17,7 +16,7 @@ const SunnyCloudyIcon = ({
       height={height}
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
-      fill={color}
+      fill="currentColor"
     >
       <defs>
         <clipPath id="af562c98a3">

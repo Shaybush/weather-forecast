@@ -74,7 +74,7 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
             className={style.starIconStyle}
             onClick={() => removeCityFromFavorites(favorite)}
           >
-            <StarIcon color="#ffdd00" />
+            <StarIcon styleClass="text-star-icon-active" />
           </div>
 
           {/* city details */}

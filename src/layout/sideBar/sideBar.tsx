@@ -4,11 +4,14 @@ import SunnyCloudyIcon from "../../assets/icons/sunnyCloudyIcon";
 import FavoritesIcon from "../../assets/icons/favoritesIcon";
 import { sideBarConfig } from "./config/sideBar.config";
 import { Link, NavLink } from "react-router-dom";
+import SettingsIcon from "../../assets/icons/settingsIcon";
 
 const Sidebar = () => {
-  const favorite = <FavoritesIcon />;
-  const sunnyCloudyIcon = <SunnyCloudyIcon />;
-  const icons = [sunnyCloudyIcon, favorite];
+  const icons = [
+    <SunnyCloudyIcon styleClass="text-link" />,
+    <FavoritesIcon styleClass="text-link" />,
+    <SettingsIcon width={48} height={48} styleClass="text-link" />,
+  ];
 
   return (
     <nav className="side-bar-wrapper">

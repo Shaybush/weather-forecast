@@ -5,12 +5,12 @@
 
 input.inputBox,
 textarea {
-  background-color: #202c3c;
-  color: #747a86;
+  background-color: var(--background-color-hover);
+  color: var(--text-mute-color);
 }
 
 ::placeholder {
-  color: #747a86;
+  color: var(--text-mute-color);
   opacity: 1;
 }
 

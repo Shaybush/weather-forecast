@@ -1,17 +1,12 @@
 import { IconProps } from "./model/icon.model";
 
-const StarIcon = ({
-  width = 32,
-  height = 32,
-  color = "black",
-  styleClass = "",
-}: IconProps) => {
+const StarIcon = ({ width = 32, height = 32, styleClass = "" }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      fill={color}
+      fill="currentColor"
       className={styleClass}
       viewBox="0 0 16 16"
     >

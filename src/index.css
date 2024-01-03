@@ -1,8 +1,144 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap");
 
 body {
-  background-color: #0b131e !important;
-  color: white !important;
+  background-color: var(--background-color) !important;
+  color: var(--text-primary) !important;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.custom-radio {
+  /* hiding browser el */
+  appearance: none;
+  /* Safari support */
+  -webkit-appearance: none;
+  border: 0.2rem solid #fff;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  outline: 1px solid var(--text-primary);
+}
+
+/* keyboard navigation focus appearance */
+.custom-radio:focus-visible {
+  outline-offset: 0;
+}
+
+:root {
+  --background-color: #0b131e;
+  --background-color-hover: #202c3c;
+  --text-primary: #ffffff;
+  --box-shadow-color: #000000;
+  --text-mute-color: #747a86;
+  --wind-color: #33415b;
+  --link-color: #828a93;
+  --star-color: #828a93;
+  --star-color-active: #ffdd00;
+}
+
+html[data-theme="light"] {
+  --background-color: #ffffff;
+  --background-color-hover: #e3e3e3;
+  --text-primary: #64bbe2;
+  --box-shadow-color: #000000;
+  --text-mute-color: #333333;
+  --wind-color: #5a5a5a;
+  --link-color: #333333;
+  --star-color: #828a93;
+  --star-color-active: #f4ce14;
+}
+
+html[data-theme="dark"] {
+  --background-color: #0b131e;
+  --background-color-hover: #202c3c;
+  --text-primary: #ffffff;
+  --box-shadow-color: #000000;
+  --text-mute-color: #b9b4c7;
+  --wind-color: #33415b;
+  --link-color: #828a93;
+  --star-color: #828a93;
+  --star-color-active: #ffdd00;
+}
+
+html[data-theme="green"] {
+  --background-color: #f4fdff;
+  --background-color-hover: #e4ebec;
+  --text-primary: #214e34;
+  --box-shadow-color: #857e7b;
+  --text-mute-color: #747a86;
+  --wind-color: #214e34;
+  --link-color: #828a93;
+  --star-color: #828a93;
+  --star-color-active: #425f57;
+}
+
+/* backgrounds */
+.bg-background {
+  background: var(--background-color) !important;
+}
+
+.bg-background-hover {
+  background: var(--background-color-hover) !important;
+}
+
+.bg-text-primary {
+  background: var(--text-primary) !important;
+}
+
+.bg-shadow {
+  background: var(--box-shadow-color) !important;
+}
+
+.bg-mute {
+  background: var(--text-mute-color) !important;
+}
+
+.bg-link {
+  background: var(--link-color) !important;
+}
+
+.bg-star-icon {
+  background: var(--star-color) !important;
+}
+
+.bg-star-icon-active {
+  background: var(--star-color-active) !important;
+}
+/* backgrounds -end */
+
+/* text colors */
+.text-background {
+  color: var(--background-color) !important;
+}
+
+.text-background-hover {
+  color: var(--background-color-hover) !important;
+}
+
+.text-text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-shadow {
+  color: var(--box-shadow-color) !important;
+}
+
+.text-mute {
+  color: var(--text-mute-color) !important;
+}
+
+.text-link {
+  color: var(--link-color) !important;
+}
+
+.text-star-icon {
+  color: var(--star-color) !important;
+}
+
+.text-star-icon-active {
+  color: var(--star-color-active) !important;
+}
+/* text colors - end */

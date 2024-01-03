@@ -1,12 +1,12 @@
 .cardContainer {
-  background-color: #202c3c !important;
+  background-color: var(--background-color-hover) !important;
   padding: 40px 52px;
   border-radius: 15px;
   transition: 0.5s;
 }
 
 .cardHeader {
-  color: #747a86;
+  color: var(--text-primary);
   margin-bottom: 24px;
   font-size: 18px;
   font-weight: 700;

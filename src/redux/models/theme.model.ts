@@ -3,8 +3,7 @@ export interface IThemeModel {
 }
 
 export enum ETheme {
-  DARK,
-  LIGHT,
-  GREEN,
-  BLUE
+  DARK = 'dark',
+  LIGHT = 'light',
+  GREEN = 'green'
 }

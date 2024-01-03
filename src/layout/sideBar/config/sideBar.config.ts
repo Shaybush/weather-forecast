@@ -13,6 +13,11 @@ export const sideBarConfig: sideBarModel[] = [
   {
     icon: 1,
     label: 'Favorites',
-    route: '/favoritesView'
+    route: '/favorites'
+  },
+  {
+    icon: 2,
+    label: 'Settings',
+    route: '/settings'
   },
 ];

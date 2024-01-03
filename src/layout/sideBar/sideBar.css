@@ -1,5 +1,5 @@
 .side-bar-wrapper {
-  background-color: #202c3c;
+  background-color: var(--background-color-hover);
   margin: 0 auto;
   width: 75%;
   height: 100%;
@@ -14,13 +14,13 @@
   margin: 25px auto 40px auto;
   width: 60%;
   height: 60px;
-  background-color: #33415b;
+  background-color: var(--wind-color);
   border-radius: 18px;
 }
 
 .side-bar-wrapper .icons-style {
   padding: 8px 16px;
-  color: #828a93;
+  color: var(--link-color);
   list-style-type: none;
   cursor: pointer;
   transition: 0.5s;
@@ -28,27 +28,24 @@
 }
 
 .side-bar-wrapper a {
-  color: #828a93;
+  color: var(--link-color);
   text-decoration: none;
 }
 
-.side-bar-wrapper .header-inner-container {
-  background-color: #ecdfdf;
-}
 .icons-style a.active {
-  color: white;
+  color: var(--text-primary);
 }
 
 .icons-style a.active path {
-  fill: white;
+  fill: var(--text-primary);
 }
 
 .icons-style:hover,
 .icons-style:hover a,
 .icons-style:hover span {
-  color: white;
+  color: var(--text-primary);
 }
 
 .side-bar-wrapper .icons-style:hover path {
-  fill: white;
+  fill: var(--text-primary);
 }

@@ -7,10 +7,18 @@ import {
   onTurnToCelsius,
   onTurnToFahrenheit,
 } from "../../../../redux/features/tempUnitSlice";
+import StarIcon from "../../../../assets/icons/starIcon";
+import { ISearchModel } from "../search/models/search.model";
+import {
+  onAddFavorite,
+  onDeleteFavorite,
+} from "../../../../redux/features/favoriteSlice";
 
 const WeatherWidget = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
   const { unitMetric } = useAppSelector((state) => state.tempUnitSlice);
+  const { favorites } = useAppSelector((state) => state.favoriteSlice);
+
   const dispatch = useAppDispatch();
 
   const [temperatureValue, setTemperatureValue] = useState(0);
@@ -37,24 +45,56 @@ const WeatherWidget = () => {
     func();
   }, [currentCity, unitMetric]);
 
+  const toggleFavorite = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    favorites.some((favorite) => favorite.key === currentCity.key)
+      ? // remove from state
+        dispatch(onDeleteFavorite({ Key: currentCity.key || "" }))
+      : // add current city to favorite
+        dispatch(
+          onAddFavorite({
+            cityName: currentCity.city || "",
+            countryName: currentCity.country || "",
+            key: currentCity.key || "",
+          })
+        );
+  };
+
   return (
     <div
       className={`d-flex justify-content-between ${style.weatherWidgetWrapper}`}
     >
       <div>
+        <div onClick={(e) => toggleFavorite(e)}>
+          <StarIcon
+            width={25}
+            height={25}
+            styleClass={`
+            cursor-pointer
+              ${
+                favorites.some((favorite) => favorite.key === currentCity.key)
+                  ? "text-star-icon-active"
+                  : "text-star-icon"
+              }
+            `}
+          />
+        </div>
         <div className="d-flex align-items-center">
           <h2 className={style.cityHeader}>{currentCity.city}</h2>
+          {/* unit switch */}
           <div className="ms-2 switch">
             <button
               onClick={() => dispatch(onTurnToCelsius())}
-              className={`btn btn-dark ${style.btnCelsius}`}
+              className="btn btn-dark"
             >
               C
             </button>
             <span className="px-1">/</span>
             <button
               onClick={() => dispatch(onTurnToFahrenheit())}
-              className={`btn btn-dark ${style.btnFahrenheit}`}
+              className="btn btn-dark"
             >
               F
             </button>
