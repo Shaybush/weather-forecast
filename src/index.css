@@ -28,6 +28,9 @@ body {
 }
 
 :root {
+  --text-white: #ffffff;
+  --text-dark: #000000;
+  --text-dark-light: #333333;
   --background-color: #0b131e;
   --background-color-hover: #202c3c;
   --text-primary: #ffffff;

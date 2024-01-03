@@ -19,14 +19,14 @@ const ThemeSettings = () => {
         Choose how Weather app looks to you. Select a single theme, or sync with
         your system and automatically dark mode.
       </p>
-      <h5 className="text-primary">Theme mode</h5>
+      <h4 className="text-mute font-weight-bold mb-3">Theme mode</h4>
 
       <div>
         {/* light mode */}
         <RadioButton
           name="themeMode"
           onChange={(e) => switchLight(e)}
-          text="Light"
+          text="Light Mode"
           value={ETheme.LIGHT}
         />
 
@@ -34,7 +34,7 @@ const ThemeSettings = () => {
         <RadioButton
           name="themeMode"
           onChange={(e) => switchLight(e)}
-          text="Dark"
+          text="Dark Mode"
           value={ETheme.DARK}
         />
 
@@ -42,7 +42,7 @@ const ThemeSettings = () => {
         <RadioButton
           name="themeMode"
           onChange={(e) => switchLight(e)}
-          text="Lime"
+          text="Lime Mode"
           value={ETheme.GREEN}
         />
       </div>
