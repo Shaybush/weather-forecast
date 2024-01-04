@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { onChangeCurrentCity } from "../../redux/features/citySlice";
 import { IGeoLocationModel } from "./models/weatherView.model";
 import LoadingLine from "../../shared/components/loadingLine";
+import { toast } from "react-toastify";
 
 const WeatherView = () => {
   const dispatch = useAppDispatch();
@@ -14,19 +15,25 @@ const WeatherView = () => {
 
   // on init get tel aviv
   useEffect(() => {
-    if (Object.keys(currentCity).length === 0) getLanLong();
+    const timer = setTimeout(() => {
+      if (Object.keys(currentCity).length === 0) getLanLong();
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const getLanLong = () => {
-    const options = {
-      enableHighAccuracy: true,
-      maximumAge: 0,
-    };
-    if (navigator.geolocation)
-      navigator.geolocation.getCurrentPosition(success, error, options);
+    if (!navigator.geolocation) {
+      toast("browser not supported");
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => getPositionByLandmark(position),
+        error
+      );
+    }
   };
 
-  const success = async (position: IGeoLocationModel) => {
+  const getPositionByLandmark = async (position: IGeoLocationModel) => {
     const { data } = await axios.get(
       `${
         import.meta.env.VITE_URL
@@ -47,9 +54,15 @@ const WeatherView = () => {
     );
   };
 
-  function error() {
-    console.warn("Couldn't find location");
-  }
+  const error = (): void => {
+    toast("Couldn't find your current location");
+    getPositionByLandmark({
+      coords: {
+        latitude: 32.0853,
+        longitude: 34.7818,
+      },
+    });
+  };
 
   return (
     <React.Fragment>

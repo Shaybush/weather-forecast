@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { favoritePropsModel } from "../../../../redux/models/favorite.model";
 import Card from "../../../../shared/components/card";
 import style from "./favoriteItem.module.css";
+import { toast } from "react-toastify";
 
 interface FavoritesItemProps {
   favorite: favoritePropsModel;
@@ -23,21 +24,25 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
 
   useEffect(() => {
     const func = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL}/currentconditions/v1/${
-          favorite.key
-        }?apikey=${import.meta.env.VITE_APIKEY}`
-      );
-      setTemperatureValue(
-        unitMetric
-          ? data[0].Temperature.Metric.Value
-          : data[0].Temperature.Imperial.Value
-      );
-      setTemperatureUnit(
-        unitMetric
-          ? data[0].Temperature.Metric.Unit
-          : data[0].Temperature.Imperial.Unit
-      );
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_URL}/currentconditions/v1/${
+            favorite.key
+          }?apikey=${import.meta.env.VITE_APIKEY}`
+        );
+        setTemperatureValue(
+          unitMetric
+            ? data[0].Temperature.Metric.Value
+            : data[0].Temperature.Imperial.Value
+        );
+        setTemperatureUnit(
+          unitMetric
+            ? data[0].Temperature.Metric.Unit
+            : data[0].Temperature.Imperial.Unit
+        );
+      } catch (err) {
+        toast(String(err));
+      }
     };
     func();
   }, []);

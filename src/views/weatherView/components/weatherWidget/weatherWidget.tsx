@@ -12,6 +12,7 @@ import {
 } from "../../../../redux/features/tempUnitSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import style from "./weatherWidget.module.css";
+import { toast } from "react-toastify";
 
 const WeatherWidget = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
@@ -25,22 +26,26 @@ const WeatherWidget = () => {
 
   useEffect(() => {
     const func = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL}/currentconditions/v1/${
-          currentCity.key
-        }?apikey=${import.meta.env.VITE_APIKEY}`
-      );
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_URL}/currentconditions/v1/${
+            currentCity.key
+          }?apikey=${import.meta.env.VITE_APIKEY}`
+        );
 
-      setTemperatureValue(
-        unitMetric
-          ? data[0].Temperature.Metric.Value
-          : data[0].Temperature.Imperial.Value
-      );
-      setTemperatureUnit(
-        unitMetric
-          ? data[0].Temperature.Metric.Unit
-          : data[0].Temperature.Imperial.Unit
-      );
+        setTemperatureValue(
+          unitMetric
+            ? data[0].Temperature.Metric.Value
+            : data[0].Temperature.Imperial.Value
+        );
+        setTemperatureUnit(
+          unitMetric
+            ? data[0].Temperature.Metric.Unit
+            : data[0].Temperature.Imperial.Unit
+        );
+      } catch (err) {
+        toast(String(err));
+      }
     };
     func();
   }, [currentCity, unitMetric]);

@@ -4,6 +4,7 @@ import { ISearchModel } from "./models/search.model";
 import AutoCompleteValues from "./autoCompleteValues/autoCompleteValues";
 import style from "./search.module.css";
 import debounce from "lodash.debounce";
+import { toast } from "react-toastify";
 
 interface exmaple {
   Key: string;
@@ -41,7 +42,7 @@ const Search = () => {
         setInput("");
       }
     } catch (err) {
-      console.log(err);
+      toast(String(err));
     }
   };
 

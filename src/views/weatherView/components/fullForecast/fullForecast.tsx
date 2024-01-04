@@ -12,6 +12,7 @@ import {
   IAxiosDailyForecastsModel,
   IDailyForecastsModel,
 } from "./models/fullForecast.model";
+import { toast } from "react-toastify";
 
 const FullForecast = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
@@ -40,7 +41,7 @@ const FullForecast = () => {
       const foreCastTemp: IDailyForecastsModel[] = mapForecasts(DailyForecasts);
       setForeCast(foreCastTemp);
     } catch (err) {
-      console.log(err);
+      toast(String(err));
     }
   };
 
