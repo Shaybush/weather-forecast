@@ -51,7 +51,7 @@ const FullForecast = () => {
     return dailyForecasts.map((el) => {
       const date: number = Date.parse(el.Date);
       return {
-        Date: format(date, "MMM, yyyy"),
+        Date: format(date, "dd MMM"),
         Day: el.Day,
         Temperature: el.Temperature,
       };

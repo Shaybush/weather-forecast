@@ -1,0 +1,22 @@
+.unitSwitch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--background-color-hover);
+  border-radius: 5px;
+}
+
+.buttonSwitch {
+  padding: 5px 10px;
+  border: none;
+  background-color: #4caf50;
+  color: var(--text-white);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.buttonSwitch:hover {
+  background-color: #45a049;
+}

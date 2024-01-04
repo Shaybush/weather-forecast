@@ -86,26 +86,7 @@ const WeatherWidget = () => {
             `}
           />
         </div>
-        <div className="d-flex align-items-center">
-          <h2 className={style.cityHeader}>{currentCity.city}</h2>
-          {/* unit switch */}
-          <div className="ms-2 switch">
-            <button
-              onClick={() => dispatch(onTurnToCelsius())}
-              className="btn btn-dark"
-            >
-              C
-            </button>
-            <span className="px-1">/</span>
-            <button
-              onClick={() => dispatch(onTurnToFahrenheit())}
-              className="btn btn-dark"
-            >
-              F
-            </button>
-          </div>
-        </div>
-
+        <h2 className={style.cityHeader}>{currentCity.city}</h2>
         <p className={style.countrySubHeader}>{currentCity?.country}</p>
         <h4 className={style.tempDesign}>
           {temperatureValue}°{temperatureUnit}

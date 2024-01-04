@@ -12,7 +12,7 @@ const ThemeSettings = () => {
   };
 
   return (
-    <div>
+    <div className="mb-4">
       <h3 className="text-mute">Theme preferences</h3>
       <hr className="text-mute" />
       <p className="text-mute">
