@@ -1,0 +1,40 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveCloud {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+.weatherLoading {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.sun {
+  animation: spin 4s linear infinite;
+}
+
+.fillCloud {
+  fill: var(--text-primary);
+  animation: moveCloud 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .weatherLoading {
+    margin: auto;
+  }
+}

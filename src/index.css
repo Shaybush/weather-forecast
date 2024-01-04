@@ -11,6 +11,14 @@ body {
   cursor: pointer;
 }
 
+a.active {
+  color: var(--text-primary);
+}
+
+a.active path {
+  fill: var(--text-primary);
+}
+
 .custom-radio {
   /* hiding browser el */
   appearance: none;

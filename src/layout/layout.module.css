@@ -1,0 +1,44 @@
+.sideBarContainer {
+  width: 160px;
+  padding: 24px 0;
+  height: 100vh;
+}
+
+.outletContainer {
+  width: calc(100% - 150px);
+  padding: 24px 8px 24px 0;
+  height: 100vh;
+  max-height: calc(100vh - 28px);
+  overflow-y: auto;
+}
+
+.layoutWrapper {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .layoutWrapper {
+    /* display: block; */
+    flex-wrap: wrap;
+    position: relative;
+    height: 100vh;
+  }
+
+  .sideBarContainer {
+    padding: 0;
+    order: 1;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    height: 15vh;
+  }
+
+  .outletContainer {
+    width: 100%;
+    order: 0;
+    overflow-y: auto;
+    height: 85vh;
+  }
+}

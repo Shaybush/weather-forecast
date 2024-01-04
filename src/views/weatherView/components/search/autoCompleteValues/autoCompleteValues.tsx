@@ -36,7 +36,7 @@ const AutoCompleteValues = ({
     event.stopPropagation();
     if (favorites.some((favorite) => favorite.key === city.key)) {
       // remove from state
-      dispatch(onDeleteFavorite({ Key: city.key }));
+      dispatch(onDeleteFavorite({ Key: city.key || "" }));
     } else {
       addNewCity(city);
     }
@@ -44,7 +44,7 @@ const AutoCompleteValues = ({
 
   const addNewCity = (city: ISearchModel) => {
     const newFavorite: favoritePropsModel = {
-      key: city.key,
+      key: city.key || "",
       cityName: city.city || "",
       countryName: city.country || "",
     };

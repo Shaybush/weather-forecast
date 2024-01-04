@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import style from "./weatherWidget.module.css";
-import {
-  onTurnToCelsius,
-  onTurnToFahrenheit,
-} from "../../../../redux/features/tempUnitSlice";
 import StarIcon from "../../../../assets/icons/starIcon";
-import { ISearchModel } from "../search/models/search.model";
 import {
   onAddFavorite,
   onDeleteFavorite,
 } from "../../../../redux/features/favoriteSlice";
+import {
+  onTurnToCelsius,
+  onTurnToFahrenheit,
+} from "../../../../redux/features/tempUnitSlice";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
+import style from "./weatherWidget.module.css";
 
 const WeatherWidget = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
@@ -31,6 +30,7 @@ const WeatherWidget = () => {
           currentCity.key
         }?apikey=${import.meta.env.VITE_APIKEY}`
       );
+
       setTemperatureValue(
         unitMetric
           ? data[0].Temperature.Metric.Value

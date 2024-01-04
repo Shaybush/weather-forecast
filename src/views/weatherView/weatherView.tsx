@@ -6,6 +6,7 @@ import WeatherWidget from "./components/weatherWidget";
 import React, { useEffect } from "react";
 import { onChangeCurrentCity } from "../../redux/features/citySlice";
 import { IGeoLocationModel } from "./models/weatherView.model";
+import LoadingLine from "../../shared/components/loadingLine";
 
 const WeatherView = () => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ const WeatherView = () => {
           <FullForecast />
         </React.Fragment>
       ) : (
-        <div className="p-2">loader..</div>
+        <LoadingLine />
       )}
     </React.Fragment>
   );

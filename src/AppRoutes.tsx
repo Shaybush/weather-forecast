@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Layout from "./layout/layout";
+import Loading from "./shared/components/loading";
 
 const AppRoutes = () => {
   const WeatherView = React.lazy(() => import("./views/weatherView"));
@@ -15,7 +16,7 @@ const AppRoutes = () => {
           <Route
             index
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<Loading />}>
                 <WeatherView />
               </Suspense>
             }
@@ -23,7 +24,7 @@ const AppRoutes = () => {
           <Route
             path="/favorites"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<Loading />}>
                 <FavoritesView />
               </Suspense>
             }
@@ -31,7 +32,7 @@ const AppRoutes = () => {
           <Route
             path="/settings"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<Loading />}>
                 <SettingsView />
               </Suspense>
             }
