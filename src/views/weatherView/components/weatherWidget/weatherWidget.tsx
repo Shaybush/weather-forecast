@@ -1,18 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
 import StarIcon from "../../../../assets/icons/starIcon";
 import {
   onAddFavorite,
   onDeleteFavorite,
 } from "../../../../redux/features/favoriteSlice";
-import {
-  onTurnToCelsius,
-  onTurnToFahrenheit,
-} from "../../../../redux/features/tempUnitSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import style from "./weatherWidget.module.css";
-import { toast } from "react-toastify";
 
 const WeatherWidget = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
