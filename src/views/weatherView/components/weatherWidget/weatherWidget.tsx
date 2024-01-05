@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import SunnIcon3D from "../../../../assets/icons/3D/sunnIcon3D";
 import StarIcon from "../../../../assets/icons/starIcon";
 import {
   onAddFavorite,
@@ -9,6 +8,7 @@ import {
 } from "../../../../redux/features/favoriteSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import style from "./weatherWidget.module.css";
+import SunnyCloudyIcon3D from "../../../../assets/icons/3D/sunnyCloudyIcon3D";
 
 const WeatherWidget = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
@@ -89,7 +89,7 @@ const WeatherWidget = () => {
         </h4>
       </div>
       <div className="d-none d-md-block">
-        <SunnIcon3D width={200} height={200} />
+        <SunnyCloudyIcon3D width={200} height={200} />
       </div>
     </div>
   );
