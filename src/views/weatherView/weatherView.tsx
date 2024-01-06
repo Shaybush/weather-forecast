@@ -39,7 +39,7 @@ const WeatherView = () => {
         import.meta.env.VITE_URL
       }/locations/v1/cities/geoposition/search?apikey=${
         import.meta.env.VITE_APIKEY
-      }&q=${position.coords.latitude},${position.coords.longitude}`
+      }&q=${position.coords.latitude}%2C${position.coords.longitude}`
     );
 
     // update current city to
