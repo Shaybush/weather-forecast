@@ -11,8 +11,8 @@
   </li>
   <li>npm run dev</li>
 </ul>
-
-<h4>You are ready to go enjoy!</h4>
+<a href="https://bush-weather-app.netlify.app">demo here</a>
+<h4>You are ready to go, enjoy!</h4>
 
 <h2>Project Photos -</h2>
 ![image](https://github.com/Shaybush/weather-forecast/assets/48178609/8ef38094-205f-4717-bf25-631e3a258ae6)
