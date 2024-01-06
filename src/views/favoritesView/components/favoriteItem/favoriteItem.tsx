@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { favoritePropsModel } from "../../../../redux/models/favorite.model";
 import Card from "../../../../shared/components/card";
 import style from "./favoriteItem.module.css";
+import LoadingLine from "../../../../shared/components/loadingLine";
 
 interface FavoritesItemProps {
   favorite: favoritePropsModel;
@@ -95,7 +96,7 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
           </div>
         </React.Fragment>
       ) : (
-        <div className={style.favoriteLoading}>Loading ...</div>
+        <LoadingLine />
       )}
     </Card>
   );
