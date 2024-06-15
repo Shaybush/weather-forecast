@@ -67,11 +67,11 @@ const WeatherWidget = () => {
     <div className={`d-flex justify-content-between ${style.weatherWidgetWrapper}`}>
       <div>
         {/* star icon */}
-        <span onClick={(e) => toggleFavorite(e)}>
-          {favorites.some((favorite) => favorite.key === currentCity.key) ? 
-          <FillStarIcon width={25} height={25} styleClass="cursor-pointer text-star-icon-active" /> :
-          <StarIcon width={25} height={25} styleClass="cursor-pointer text-star-icon" />}
-        </span>
+        <div onClick={(e) => toggleFavorite(e)}>
+          {favorites.some((favorite) => favorite.key === currentCity.key) ?
+            <FillStarIcon width={25} height={25} styleClass="cursor-pointer text-star-icon-active" /> :
+            <StarIcon width={25} height={25} styleClass="cursor-pointer text-star-icon" />}
+        </div>
         <h2 className={style.cityHeader}>{currentCity.city}</h2>
         <p className={style.countrySubHeader}>{currentCity?.country}</p>
         <h4 className={style.tempDesign}>
