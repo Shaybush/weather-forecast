@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ETheme, IThemeModel } from "../models/theme.model";
 
 const initialState: IThemeModel = {
-  themeMode: JSON.parse(localStorage['theme']) as ETheme || ETheme.DARK
+  themeMode: localStorage['theme'] ? JSON.parse(localStorage['theme']) as ETheme : ETheme.DARK
 };
 
 const themeSlice = createSlice({
