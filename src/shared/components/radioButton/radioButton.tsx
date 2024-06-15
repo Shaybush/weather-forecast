@@ -7,6 +7,7 @@ interface IRadioButtonModel {
   name: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   text: string;
+  checked: boolean;
 }
 
 const RadioButton: FC<IRadioButtonModel> = ({
@@ -14,6 +15,7 @@ const RadioButton: FC<IRadioButtonModel> = ({
   onChange,
   text,
   value,
+  checked
 }) => {
   return (
     <label className={styles.Label}>
@@ -23,6 +25,7 @@ const RadioButton: FC<IRadioButtonModel> = ({
         value={value}
         name={name}
         onChange={onChange}
+        checked={checked}
       />
       <span>{text}</span>
     </label>

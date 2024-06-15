@@ -9,6 +9,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import style from "./weatherWidget.module.css";
 import SunnyCloudyIcon3D from "../../../../assets/icons/3D/sunnyCloudyIcon3D";
+import FillStarIcon from "../../../../assets/icons/fillStarIcon";
 
 const WeatherWidget = () => {
   const { currentCity } = useAppSelector((state) => state.citySlice);
@@ -24,8 +25,7 @@ const WeatherWidget = () => {
     const func = async () => {
       try {
         const { data } = await axios.get(
-          `${import.meta.env.VITE_URL}/currentconditions/v1/${
-            currentCity.key
+          `${import.meta.env.VITE_URL}/currentconditions/v1/${currentCity.key
           }?apikey=${import.meta.env.VITE_APIKEY}`
         );
 
@@ -52,36 +52,26 @@ const WeatherWidget = () => {
     event.stopPropagation();
     favorites.some((favorite) => favorite.key === currentCity.key)
       ? // remove from state
-        dispatch(onDeleteFavorite({ Key: currentCity.key || "" }))
+      dispatch(onDeleteFavorite({ Key: currentCity.key || "" }))
       : // add current city to favorite
-        dispatch(
-          onAddFavorite({
-            cityName: currentCity.city || "",
-            countryName: currentCity.country || "",
-            key: currentCity.key || "",
-          })
-        );
+      dispatch(
+        onAddFavorite({
+          cityName: currentCity.city || "",
+          countryName: currentCity.country || "",
+          key: currentCity.key || "",
+        })
+      );
   };
 
   return (
-    <div
-      className={`d-flex justify-content-between ${style.weatherWidgetWrapper}`}
-    >
+    <div className={`d-flex justify-content-between ${style.weatherWidgetWrapper}`}>
       <div>
-        <div onClick={(e) => toggleFavorite(e)}>
-          <StarIcon
-            width={25}
-            height={25}
-            styleClass={`
-            cursor-pointer
-              ${
-                favorites.some((favorite) => favorite.key === currentCity.key)
-                  ? "text-star-icon-active"
-                  : "text-star-icon"
-              }
-            `}
-          />
-        </div>
+        {/* star icon */}
+        <span onClick={(e) => toggleFavorite(e)}>
+          {favorites.some((favorite) => favorite.key === currentCity.key) ? 
+          <FillStarIcon width={25} height={25} styleClass="cursor-pointer text-star-icon-active" /> :
+          <StarIcon width={25} height={25} styleClass="cursor-pointer text-star-icon" />}
+        </span>
         <h2 className={style.cityHeader}>{currentCity.city}</h2>
         <p className={style.countrySubHeader}>{currentCity?.country}</p>
         <h4 className={style.tempDesign}>

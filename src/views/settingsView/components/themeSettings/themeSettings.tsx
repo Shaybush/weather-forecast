@@ -1,11 +1,13 @@
 import { ChangeEvent } from "react";
 import { onSwitchTheme } from "../../../../redux/features/themeSlice";
-import { useAppDispatch } from "../../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import { ETheme } from "../../../../redux/models/theme.model";
 import RadioButton from "../../../../shared/components/radioButton/radioButton";
+import { radioButtonsConfig } from "../../config/themeSettings.config";
 
 const ThemeSettings = () => {
   const dispatch = useAppDispatch();
+  const { themeMode } = useAppSelector((state) => state.themeSlice);
 
   const switchLight = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(onSwitchTheme({ themeMode: event.target.value as ETheme }));
@@ -13,6 +15,7 @@ const ThemeSettings = () => {
 
   return (
     <div className="mb-4">
+      { themeMode }
       <h3 className="text-mute">Theme preferences</h3>
       <hr className="text-mute" />
       <p className="text-mute">
@@ -21,31 +24,16 @@ const ThemeSettings = () => {
       </p>
       <h4 className="text-mute font-weight-bold mb-3">Theme mode</h4>
 
-      <div>
-        {/* light mode */}
+      {radioButtonsConfig.map(btn => (
         <RadioButton
           name="themeMode"
+          key={btn.id}
           onChange={(e) => switchLight(e)}
-          text="Light Mode"
-          value={ETheme.LIGHT}
+          text={btn.text}
+          value={btn.value}
+          checked = {themeMode == btn.id}
         />
-
-        {/* dark mode */}
-        <RadioButton
-          name="themeMode"
-          onChange={(e) => switchLight(e)}
-          text="Dark Mode"
-          value={ETheme.DARK}
-        />
-
-        {/* green mode */}
-        <RadioButton
-          name="themeMode"
-          onChange={(e) => switchLight(e)}
-          text="Lime Mode"
-          value={ETheme.GREEN}
-        />
-      </div>
+      ))}
     </div>
   );
 };

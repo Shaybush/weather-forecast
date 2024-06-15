@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SunnyCloudyIcon3D from "../../../../assets/icons/3D/sunnyCloudyIcon3D";
-import StarIcon from "../../../../assets/icons/starIcon";
 import { onChangeCurrentCity } from "../../../../redux/features/citySlice";
 import { onDeleteFavorite } from "../../../../redux/features/favoriteSlice";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
@@ -11,6 +10,7 @@ import { favoritePropsModel } from "../../../../redux/models/favorite.model";
 import Card from "../../../../shared/components/card";
 import style from "./favoriteItem.module.css";
 import LoadingLine from "../../../../shared/components/loadingLine";
+import FillStarIcon from "../../../../assets/icons/fillStarIcon";
 
 interface FavoritesItemProps {
   favorite: favoritePropsModel;
@@ -80,7 +80,7 @@ const FavoriteItem = ({ favorite }: FavoritesItemProps) => {
             className={style.starIconStyle}
             onClick={() => removeCityFromFavorites(favorite)}
           >
-            <StarIcon styleClass="text-star-icon-active" />
+            <FillStarIcon styleClass="text-star-icon-active" />
           </div>
 
           {/* city details */}
