@@ -1,6 +1,6 @@
 # Weather Forcast App
 
-Simple Weather Forcast App Using [Accuweather Api](https://developer.accuweather.com)
+Simple Weather Forcast App Using [Accuweather Api](https://developer.accuweather.com).
 
 [demo site](https://bush-weather-app.netlify.app)
 
