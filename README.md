@@ -2,7 +2,7 @@
 
 Simple Weather Forcast App Using [Accuweather Api](https://developer.accuweather.com)
 
-(demo site)[https://bush-weather-app.netlify.app]
+[demo site](https://bush-weather-app.netlify.app)
 
 ### Project Technologies - 
 
