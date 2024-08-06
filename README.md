@@ -33,7 +33,7 @@ Steps:
     <code>VITE_APIKEY={YOUR API KEY}</code>
 
    
-6. Download Dependencies:
+6. Run Project In Local:
    ```sh
    npm run dev
 
