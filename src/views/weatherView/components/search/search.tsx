@@ -1,10 +1,10 @@
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { ISearchModel } from "./models/search.model";
 import AutoCompleteValues from "./autoCompleteValues/autoCompleteValues";
 import style from "./search.module.css";
-import debounce from "lodash.debounce";
 import { toast } from "react-toastify";
+import { useDebouncer } from "../../../../hooks/useDebouncer";
 
 interface exmaple {
   Key: string;
@@ -17,7 +17,7 @@ interface exmaple {
 const Search = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState<ISearchModel[]>([]);
-  const DEBOUNCE_TIME = 300;
+  const DEBOUNCE_TIME = 1000;
 
   const fetch = async (value: string): Promise<void> => {
     try {
@@ -47,11 +47,14 @@ const Search = () => {
   };
 
   // Debounce the API call
-  const debouncedFetch = useCallback(debounce(fetch, DEBOUNCE_TIME), []);
+  const debouncer = useDebouncer(input, DEBOUNCE_TIME);
+
+  useEffect(() => {
+    fetch(debouncer);
+  }, [debouncer]);
 
   const handleInput = (value: string): void => {
     setInput(value);
-    debouncedFetch(value);
   };
 
   return (
